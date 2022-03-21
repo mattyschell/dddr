@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean id="boroBlockSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_SEARCH_BOROUGH_BLOCK"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inDateType"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inStartDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inEndDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inToday"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" ref="notToday"/>
+					<constructor-arg index="3" value="false"/>
+				</bean>			
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastDays"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastYears"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBlock"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="boroBlockRm"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="boroBlockLotSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_SEARCH_BOROUGH_BLOCK_LOT"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inDateType"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inStartDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inEndDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inToday"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" ref="notToday"/>
+					<constructor-arg index="3" value="false"/>
+				</bean>			
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastDays"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastYears"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBlock"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLot"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="boroBlockLotRm"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="reucSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_SEARCH_REUC"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inDateType"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inStartDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inEndDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inToday"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" ref="notToday"/>
+					<constructor-arg index="3" value="false"/>
+				</bean>			
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastDays"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastYears"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inREUCIdent"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="reucRm"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	 
+	<bean id="airSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_SEARCH_AIR_RIGHTS"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inDateType"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inStartDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inEndDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inToday"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" ref="notToday"/>
+					<constructor-arg index="3" value="false"/>
+				</bean>			
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastDays"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastYears"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBlock"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inAirRightsNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="airRm"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="subSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_SEARCH_SUB_RIGHTS"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inDateType"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inStartDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inEndDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inToday"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" ref="notToday"/>
+					<constructor-arg index="3" value="false"/>
+				</bean>			
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastDays"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastYears"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBlock"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSubNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="subRm" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="condoSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_SEARCH_CONDO"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inDateType"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inStartDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inEndDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inToday"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" ref="notToday"/>
+					<constructor-arg index="3" value="false"/>
+				</bean>			
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastDays"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastYears"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inCondoNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="condoRm" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lineSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_SEARCH_BOUNDARY_LINE"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inDateType"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inStartDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inEndDate"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inToday"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" ref="notToday"/>
+					<constructor-arg index="3" value="false"/>
+				</bean>			
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastDays"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLastYears"/>
+					<constructor-arg index="1" ref="numeric"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBlock"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inLineType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="lineRm" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="insetMapSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_GET_MAP_INSET"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inMapId"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>			
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="insetMapRm" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="libraryMapSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_GET_BORO_BLOCK"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBlock"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSection"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inVolume"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChangeType"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" ref="allChanges" />
+					<constructor-arg index="3" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortColumn"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>	
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSortOrder"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="libraryMapRm"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="pdfSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_GET_MAP_LIBRARY_PDF"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inParentId"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inChildId"/>
+					<constructor-arg index="1" ref="varchar"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="pdfRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="lotDetailSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_DETAILS_TAX_LOT"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inTransNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="lotDetailRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="airDetailSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_DETAILS_AIR_RIGHTS"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inTransNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="airDetailRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="lineDetailSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_DETAILS_BOUNDARY_LINE"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inTransNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="lineDetailRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="condoDetailSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_DETAILS_CONDO"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inTransNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="condoDetailRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="unitDetailSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_DETAILS_CONDO_UNIT"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inTransNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="unitDetailRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="reucDetailSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_DETAILS_REUC"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inTransNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="reucDetailRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="subDetailSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_DETAILS_SUB_RIGHTS"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inTransNum"/>
+					<constructor-arg index="1" ref="numeric"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>				
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="subDetailRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="habListSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_GET_HAB_LIST"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBorough"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="false"/>
+				</bean>				
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inBlock"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inSection"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="false"/>
+				</bean>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inVolume"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="false"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="habRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="habPdfSp" class="gov.nyc.dof.dtm.dao.DtmProc">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql" value="DOF_TAXMAP.PKG_ALTERATION_BOOK.PROC_GET_HAB_PDF"/>
+		<property name="parameters">
+			<list>
+				<bean class="gov.nyc.dof.dtm.dao.DtmSqlParameter">
+					<constructor-arg index="0" ref="inParentId"/>
+					<constructor-arg index="1" ref="varchar"/>
+					<constructor-arg index="2" value="true"/>
+				</bean>
+				<bean class="org.springframework.jdbc.core.SqlOutParameter">
+					<constructor-arg index="0" ref="outResults"/>
+					<constructor-arg index="1" ref="cursor"/>
+					<constructor-arg index="2" ref="habPdfRm"/>
+				</bean>
+			</list>
+		</property>		
+	</bean>
+	
+</beans>

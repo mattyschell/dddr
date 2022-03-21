@@ -1,0 +1,18 @@
+1.	(Jenn) Migrate the following layers from DOF_TAXMAP@GISDEV to DOF_TAXMAP@GISSTG:
+		BOROUGH_POINT
+		CSCL_CENTERLINE
+		HYDRO
+		LAND
+		SHORELINE
+		TRANSPORTATION_STRUCTURE
+2.	Run tables.sql on DOF_TAXMAP@GISSTG to create other DTM tables 
+3.	Run mat_view.sql on DOF_TAXMAP@GISSTG to create materialized views
+4.	Run sde_views.bat on DOF_TAXMAP@GISSTG to create SDE views
+5.	Run views.sql on DOF_TAXMAP@GISSTG to create other views
+6.	Run trigger.sql on DOF_TAXMAP@GISSTG to create trigger
+7.	Run package.sql on DOF_TAXMAP@GISSTG to update procs
+8.  Deploy geoserver configuration
+9.  Deploy gwc configuration
+10.	Run webmap-admin.sql on WEBMAP@GEOSTG to create webmap config
+11. Deploy DTM app T:\GIS\Internal\Hosting Environment\GIS\STG\dtm_2.0.38_stg.war
+

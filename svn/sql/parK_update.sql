@@ -1,0 +1,1 @@
+update spatial_feature_type set max_zoom = 13 where feature_type_id = 1293;
