@@ -2,7 +2,9 @@
 
 DOF Digital Taxmap Replacement
 
-## Package Inventory
+## Packages
+
+#### Package Inventory
 
 | Package Name | Source | File Name | Notes |
 | --- | --- | --- | --- |
@@ -14,7 +16,7 @@ DOF Digital Taxmap Replacement
 
 
 
-## Table Dependencies
+#### Package Table Dependencies
 
 All are already included in https://github.com/mattyschell/geodatabase-taxmap-toiler which migrates everything except outputs of the ETL and reference data.
 
@@ -35,3 +37,86 @@ All are already included in https://github.com/mattyschell/geodatabase-taxmap-to
 | map_inset_library | Y |
 | map_library | Y |
 | tax_block_polygon | Y | 
+
+#### Package Verification
+
+```sql
+declare
+   type testcursor is ref cursor;
+   boros testcursor;
+begin
+    PKG_ALTERATION_BOOK.PROC_GET_BOROS(boros);
+    DBMS_SQL.RETURN_RESULT(boros); 
+end;
+```
+
+## Application Database Dependencies
+
+#### DOF_TAXMAP schema
+
+All data not already migrated with https://github.com/mattyschell/geodatabase-taxmap-toiler that is not obviously junk or geodatabase administrator configuration.
+
+| Table Name | Spatial | Notes |
+| ---- | ---- | ---- | 
+| CONDO_LABEL | N | |
+| CSCL_CENTERLINE | Y | |
+| FINAL_ASMT | N | What is this? |
+| HYDRO | Y |  |
+| LAND | Y |  |
+| LOCATORS | N | empty |
+| LOT_FACE_POINT | Y | Crashes ESRI software |
+| METADATA | N | Empty of course |
+| SHORELINE | Y |  | 
+| SUB_LABEL | N |  |
+| TAX_BLOCK | Y |  |
+| TAX_BLOCK_POINT | Y |  |
+| TAX_BLOCK_POLYGON_SDO | Y |  |
+| TAX_LOT_POINT | Y |  |
+| TAX_LOT_POLYGON_SDO | Y |  |
+| TRANSPORTATION_STRUCTURE | Y |  |
+
+| View Name | 
+| ---- |  
+| AIR_RIGHT |
+| AIR_RIGHT_LOOKUP |
+| CONDOMINIUM |
+| CONDO_UNIT |
+| SUBTERRANEAN |
+| SUBTERRANEAN_LOOKUP |
+| SUBTERRANEAN_LOTS_V |
+| V_BORO_BLOCK_CHANGES |
+| V_CONDO_RANGE |
+| V_EVERY_BBL |
+| V_LOT_FACE_SMALL |
+| V_REUC_LOT |
+| V_TAX_LOT_POINT |
+
+
+#### Webmap Schema
+
+Full schema impdp
+
+#### Geoserver
+
+Might as well request a full schema impdp
+
+| DTM Legend | Database Source | Notes |
+| ---- | ---- | ---- |
+| Assembly District |  |  |
+| Borough |  |  |
+| Census Tract |  |  |
+| City Council District |  |  |
+| Community District |  |  |
+| Congressional District |  |  |
+| Fire Battalion |  |  |
+| Fire Company |  |  |
+| Fire Division |  |  |
+| Mappluto |  | Appears under "Building and Property Information |
+| NYPD Patrol Borough |  |  |
+| Park |  | Maybe from dof_taxmap |
+| Police Precinct |  |  |
+| School District |  |  |
+| State Senate District |  |  |
+| Surface Water |  | Maybe from dof_taxmap |
+| ZIP Code |  |  |
+
