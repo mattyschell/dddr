@@ -90,33 +90,3 @@ All data not already migrated with https://github.com/mattyschell/geodatabase-ta
 | V_LOT_FACE_SMALL |
 | V_REUC_LOT |
 | V_TAX_LOT_POINT |
-
-
-#### Webmap Schema
-
-Full schema impdp
-
-#### Geoserver
-
-Might as well request a full schema impdp
-
-| DTM Legend | Database Source | Notes |
-| ---- | ---- | ---- |
-| Assembly District |  |  |
-| Borough |  |  |
-| Census Tract |  |  |
-| City Council District |  |  |
-| Community District |  |  |
-| Congressional District |  |  |
-| Fire Battalion |  |  |
-| Fire Company |  |  |
-| Fire Division |  |  |
-| Mappluto |  | Appears under "Building and Property Information |
-| NYPD Patrol Borough |  |  |
-| Park |  | Maybe from dof_taxmap |
-| Police Precinct |  |  |
-| School District |  |  |
-| State Senate District |  |  |
-| Surface Water |  | Maybe from dof_taxmap |
-| ZIP Code |  |  |
-
