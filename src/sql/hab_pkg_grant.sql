@@ -1,0 +1,1 @@
+ grant execute on pkg_alteration_book to "MAP_VIEWER";
