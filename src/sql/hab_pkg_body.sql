@@ -26,8 +26,8 @@ IS
    BEGIN
       strSQL :=
       'SELECT t.TRANS_NUM,
-    t.BLOCK,t.SECTION,t.VOLUME,    t.EFFECTIVE_DATE,
-    t.END_DATE,    t.CURRENT_FLAG,    t.ID,
+    t.BLOCK,t.SECTION,t.VOLUME,    to_char(t.EFFECTIVE_DATE, ''yyyy/mm/dd'') AS EFFECTIVE_DATE,
+    to_char(t.END_DATE, ''yyyy/mm/dd'') AS END_DATE,    t.CURRENT_FLAG,    t.ID,
     d.description "Borough"
     FROM  MAP_LIBRARY t ,dab_domains d
            WHERE t.borough = d.code';
@@ -59,7 +59,7 @@ IS
       THEN
          strSQL := strSQL || inSortColumn || ' ' || inSortOrder || ' ,' ;
       END IF;
-      strSQL := strSQL || ' t.EFFECTIVE_DATE desc' ;
+      strSQL := strSQL || ' to_char(t.EFFECTIVE_DATE, ''yyyy/mm/dd'') desc' ;
       OPEN outResults FOR strSQL;
    END;
    PROCEDURE PROC_GET_BORO_VOLUME(
@@ -75,8 +75,8 @@ IS
    BEGIN
       strSQL :=
       'SELECT t.TRANS_NUM,
-    t.BLOCK,t.SECTION,t.VOLUME,    t.EFFECTIVE_DATE,
-    t.END_DATE,    t.CURRENT_FLAG,    t.ID,
+    t.BLOCK,t.SECTION,t.VOLUME,    to_char(t.EFFECTIVE_DATE, ''yyyy/mm/dd'') AS EFFECTIVE_DATE,
+    to_char(t.END_DATE, ''yyyy/mm/dd'') AS END_DATE,    t.CURRENT_FLAG,    t.ID,
     d.description "Borough"
     FROM  MAP_LIBRARY t ,dab_domains d
            WHERE t.borough = d.code';
@@ -100,7 +100,7 @@ IS
       THEN
          strSQL := strSQL || inSortColumn || ' ' || inSortOrder || ' ,' ;
       END IF;
-      strSQL := strSQL || ' t.EFFECTIVE_DATE desc' ;
+      strSQL := strSQL || ' to_char(t.EFFECTIVE_DATE, ''yyyy/mm/dd'') desc' ;
       OPEN outResults FOR strSQL;
    END;
    PROCEDURE PROC_GET_MAP_INSET(
