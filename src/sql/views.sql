@@ -23,6 +23,7 @@ AS
           air_rights_lot_number,
           effective_tax_year
      FROM air_rights_lots;
+grant select on AIR_RIGHT to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW AIR_RIGHT_LOOKUP
 (
@@ -39,6 +40,7 @@ AS
           air_rights_lot_number
      FROM air_rights_lots
     WHERE donating_BBL != '0000000000';
+grant select on AIR_RIGHT_LOOKUP to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW CONDO_UNIT
 (
@@ -69,6 +71,7 @@ AS
           unit_designation,
           effective_tax_year
      FROM condo_units;
+grant select on CONDO_UNIT to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW CONDOMINIUM
 (
@@ -98,6 +101,7 @@ AS
                   SUBSTR (condo_billing_bbl, 7) billing_lot
              FROM condo)
     WHERE CONDO_BILLING_BBL != '0000000000';
+grant select on CONDOMINIUM to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW SUBTERRANEAN
 (
@@ -122,6 +126,7 @@ AS
           SUBTERRANEAN_LOT_number,
           effective_tax_year
      FROM SUBTERRANEAN_LOTS;
+grant select on SUBTERRANEAN to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW SUBTERRANEAN_LOOKUP
 (
@@ -138,6 +143,7 @@ AS
           subterranean_lot_number
      FROM subterranean_lots
     WHERE appurtenant_BBL != '0000000000';
+grant select on SUBTERRANEAN_LOOKUP to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW V_BORO_BLOCK_CHANGES
 (
@@ -192,8 +198,8 @@ AS
              WHERE t.trans_num = w.trans_num) u,
            tax_block tb
      WHERE u.boro_block = tb.boro_block(+));
-
 INSERT INTO USER_SDO_GEOM_METADATA SELECT 'V_BORO_BLOCK_CHANGES', 'SHAPE', DIMINFO, SRID FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME = 'BOROUGH_POINT';
+grant select on V_BORO_BLOCK_CHANGES to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW V_CONDO_RANGE
 (
@@ -214,9 +220,9 @@ AS
                FROM condo_units
            GROUP BY condo_base_bbl) u
     WHERE t.bbl = u.bbl;
-
 INSERT INTO USER_SDO_GEOM_METADATA SELECT 'V_CONDO_RANGE', 'SHAPE', DIMINFO, SRID FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME = 'BOROUGH_POINT';
-    
+grant select on V_CONDO_RANGE to "MAP_VIEWER";    
+
 CREATE OR REPLACE FORCE VIEW V_LOT_FACE_SMALL
 (
    SHAPE,
@@ -251,8 +257,8 @@ AS
           || ' ft'
      FROM LOT_FACE_POINT
     WHERE LENGTH < 5 AND LENGTH > 0;
-
 INSERT INTO USER_SDO_GEOM_METADATA SELECT 'V_LOT_FACE_SMALL', 'SHAPE', DIMINFO, SRID FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME = 'BOROUGH_POINT';
+grant select on V_LOT_FACE_SMALL to "MAP_VIEWER";
 
 CREATE OR REPLACE FORCE VIEW V_TAX_LOT_POINT
 (
@@ -325,8 +331,8 @@ AS
           air_label a,
           sub_label s
     WHERE l.bbl = a.bbl(+) AND l.bbl = c.bbl(+) AND l.bbl = s.bbl(+);
-
 INSERT INTO USER_SDO_GEOM_METADATA SELECT 'V_TAX_LOT_POINT', 'SHAPE', DIMINFO, SRID FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME = 'BOROUGH_POINT';
+grant select on V_TAX_LOT_POINT to "MAP_VIEWER";
 
 -- this one was created with the ancient sde command line
 -- lets take a risk and create it as a database view, not registered with
@@ -357,6 +363,7 @@ AS
     SUBTERRANEAN_LOTS 
 WHERE 
     tax_lot_polygon_sdo.bbl=subterranean_lots.appurtenant_bbl;
+grant select on SUBTERRANEAN_LOTS_V to "MAP_VIEWER";
 
 -- this one was separated from the others in its own file
 CREATE OR REPLACE FORCE VIEW V_REUC_LOT
@@ -395,3 +402,4 @@ AS
           "GLOBALID"
      FROM REUC_LOTS
     WHERE deleted_flag = 0 OR deleted_flag IS NULL;
+grant select on V_REUC_LOT to "MAP_VIEWER";
