@@ -327,3 +327,71 @@ AS
     WHERE l.bbl = a.bbl(+) AND l.bbl = c.bbl(+) AND l.bbl = s.bbl(+);
 
 INSERT INTO USER_SDO_GEOM_METADATA SELECT 'V_TAX_LOT_POINT', 'SHAPE', DIMINFO, SRID FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME = 'BOROUGH_POINT';
+
+-- this one was created with the ancient sde command line
+-- lets take a risk and create it as a database view, not registered with
+-- the geodatabase
+CREATE OR REPLACE FORCE VIEW SUBTERRANEAN_LOTS_V
+ (OBJECTID
+ ,SHAPE
+ ,APPURTENANT_BORO
+ ,APPURTENANT_BLOCK
+ ,APPURTENANT_LOT
+ ,APPURTENANT_BBL
+ ,SUBTERRANEAN_LOT_NUMBER
+ ,EFFECTIVE_TAX_YEAR
+ ,BBL)
+AS 
+ SELECT  
+ tax_lot_polygon_sdo.objectid, 
+ tax_lot_polygon_sdo.shape, 
+ subterranean_lots.appurtenant_boro, 
+ subterranean_lots.appurtenant_block, 
+ subterranean_lots.appurtenant_lot, 
+ subterranean_lots.appurtenant_bbl, 
+ subterranean_lots.subterranean_lot_number, 
+ subterranean_lots.effective_tax_year, 
+ subterranean_lots.appurtenant_boro||lpad(subterranean_lots.appurtenant_block,5,0)||lpad(subterranean_lots.subterranean_lot_number,4,0) 
+ FROM  
+    TAX_LOT_POLYGON_SDO, 
+    SUBTERRANEAN_LOTS 
+WHERE 
+    tax_lot_polygon_sdo.bbl=subterranean_lots.appurtenant_bbl;
+
+-- this one was separated from the others in its own file
+CREATE OR REPLACE FORCE VIEW V_REUC_LOT
+(
+   OBJECTID,
+   APPURTENANT_BORO,
+   APPURTENANT_BLOCK,
+   APPURTENANT_LOT,
+   APPURTENANT_BBL,
+   REUC_NUMBER,
+   DELETED_FLAG,
+   CREATED_BY,
+   CREATED_DATE,
+   LAST_MODIFIED_BY,
+   LAST_MODIFIED_DATE,
+   AV_CHANGE,
+   BW_CHANGE,
+   EFFECTIVE_TAX_YEAR,
+   GLOBALID
+)
+AS
+   SELECT "OBJECTID",
+          "APPURTENANT_BORO",
+          "APPURTENANT_BLOCK",
+          "APPURTENANT_LOT",
+          "APPURTENANT_BBL",
+          "REUC_NUMBER",
+          "DELETED_FLAG",
+          "CREATED_BY",
+          "CREATED_DATE",
+          "LAST_MODIFIED_BY",
+          "LAST_MODIFIED_DATE",
+          "AV_CHANGE",
+          "BW_CHANGE",
+          "EFFECTIVE_TAX_YEAR",
+          "GLOBALID"
+     FROM REUC_LOTS
+    WHERE deleted_flag = 0 OR deleted_flag IS NULL;

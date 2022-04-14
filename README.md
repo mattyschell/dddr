@@ -44,9 +44,8 @@ All are already included in https://github.com/mattyschell/geodatabase-taxmap-to
 | map_library | Y |
 | tax_block_polygon | Y | 
 
-#### Package Install and Verification
+#### Standalone Package Install and Verification
 
-As DOF_TAXMAP (untested, hacked here for now)
 
 ```
 sqlplus dof_taxmap/iluvesri247@gisdb @compilepackages.sql
