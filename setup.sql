@@ -1,0 +1,13 @@
+@compilepackages.sql
+/
+@src/sql/gis_utils_spec.sql
+/
+@src/sql/gis_utils_body.sql
+/
+@src/sql/setup.sql
+@src/sql/views.sql
+begin
+    dbms_stats.gather_schema_stats(user);
+end;
+/
+exit

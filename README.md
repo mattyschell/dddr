@@ -2,6 +2,12 @@
 
 DOF Digital Taxmap Replacement
 
+## Attempt to Perform All Data Definition
+
+```
+sqlplus dof_taxmap/iluvesri247@devdb @setup.sql
+```
+
 ## Packages
 
 #### Package Inventory
@@ -79,7 +85,6 @@ All data not already migrated with https://github.com/mattyschell/geodatabase-ta
 | SUB_LABEL | N |  |
 | TAX_BLOCK | Y |  |
 | TAX_BLOCK_POINT | Y |  |
-| TAX_BLOCK_POLYGON_SDO | Y |  |
 | TAX_LOT_POINT | Y |  |
 | TAX_LOT_POLYGON_SDO | Y |  |
 | TRANSPORTATION_STRUCTURE | Y |  |

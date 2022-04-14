@@ -6,5 +6,3 @@
 /
 @src/sql/hab_pkg_grant.sql
 /
-exit
-
