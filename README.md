@@ -16,11 +16,13 @@ Set oracle home to classic exp/imp.  It's what we have to work with.
 dddr>set ORACLE_HOME=D:\ancientjunk\dev\oracle\product\product\11.2.0\client_1\
 ```
 
-Update the environmentals at the top of the batch file
+Update the environmentals at the top of the batch file.
 
 ```
 dddr>sample_expimp.bat
 ```
+
+This will run for a long time.  Consider splitting LOT_FACE_POINT into a separate exp/imp script.
 
 
 ## Packages

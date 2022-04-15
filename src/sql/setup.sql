@@ -64,7 +64,8 @@ gis_utils.add_spatial_index('TAX_BLOCK'
                             ,0.0005);
 end;
 /
-create unique index tax_block_boro_block_idx on tax_block ('BORO_BLOCK');
+-- let import take care of this, something is wacky
+--create unique index tax_block_boro_block_idx on tax_block ('BORO_BLOCK');
 grant select on tax_block to "MAP_VIEWER"; 
 --
 create table tax_block_point (
@@ -134,6 +135,9 @@ create table tax_lot_polygon_sdo
 	globalid char(38) not null enable, 
 	shape mdsys.sdo_geometry 
 );
+-- if the source is registered with ESRI for no reason
+--ALTER TABLE tax_lot_polygon_sdo 
+--  ADD SE_ANNO_CAD_DATA BLOB;
 begin
 gis_utils.add_spatial_index('TAX_LOT_POLYGON_SDO'
                             ,'SHAPE'
@@ -141,7 +145,9 @@ gis_utils.add_spatial_index('TAX_LOT_POLYGON_SDO'
                             ,0.0005);
 end;
 /
-create unique index tax_lot_polygon_sdo_uqc on tax_lot_polygon_sdo ('OBJECTID');
+--Something is out of whack here, too.  
+-- ESRI and I are both creating keys or something
+--create unique index tax_lot_polygon_sdo_uqc on tax_lot_polygon_sdo ('OBJECTID');
 create index lot_sdo_bbl_idx on tax_lot_polygon_sdo ('BBL');
 grant select on tax_lot_polygon_sdo to "MAP_VIEWER"; 
 --
@@ -158,5 +164,6 @@ gis_utils.add_spatial_index('TRANSPORTATION_STRUCTURE'
                             ,0.0005);
 end;
 /
-create unique index transportation_structure_uqc on transportation_structure ('OBJECTID');
+-- let imp take care of this, something is off in my workflow here
+--create unique index transportation_structure_uqc on transportation_structure ('OBJECTID');
 grant select on tax_lot_point to "MAP_VIEWER"; 
