@@ -1,12 +1,27 @@
-# dddr
+# DDDR
 
 DOF Digital Taxmap Replacement
 
-## Attempt to Perform All Data Definition
+## Attempt to Perform All Data Definition and Compilation
 
 ```
 sqlplus dof_taxmap/iluvesri247@devdb @setup.sql
 ```
+
+## Attempt To Use Oldskool Export Import 
+
+Set oracle home to classic exp/imp.  It's what we have to work with.
+
+```
+dddr>set ORACLE_HOME=D:\ancientjunk\dev\oracle\product\product\11.2.0\client_1\
+```
+
+Update the environmentals at the top of the batch file
+
+```
+dddr>sample_expimp.bat
+```
+
 
 ## Packages
 
